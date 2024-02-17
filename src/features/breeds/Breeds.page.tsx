@@ -1,54 +1,19 @@
-import { Autocomplete, ImageList, TextField } from "@mui/material";
 import React, { SyntheticEvent } from "react";
-import { Breed, CatImage } from "./breed.types";
+import { useListBreeds } from "./useBreeds";
+import { useListCatImages } from "./useCatImages";
+import { Autocomplete, Grid, TextField, Typography } from "@mui/material";
 import CatCard from "./CatCard";
+import { PlaceholderSkeleton } from "../../components/PlaceholderSkeleton";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Breed } from "./breed.types";
+import { ScrollToTopButton } from "../../components/ScrollToTopButton";
 
 export const BreedsPage = () => {
   const [selectedBreed, setSelectedBreed] = React.useState<Breed | null>(null);
-  const [breeds, setBreeds] = React.useState<Breed[]>([]);
-  const [cats, setCats] = React.useState<CatImage[]>([]);
-
-  React.useEffect(() => {
-    (async () => {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/breeds`, {
-        headers: {
-          "x-api-key": import.meta.env.VITE_API_KEY,
-        },
-      });
-      const breeds = await response.json();
-      setBreeds(breeds);
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    selectedBreed
-      ? (async () => {
-          const response = await fetch(
-            `${
-              import.meta.env.VITE_BASE_URL
-            }/images/search?limit=20&breed_ids=${selectedBreed.id}`,
-            {
-              headers: {
-                "x-api-key": import.meta.env.VITE_API_KEY,
-              },
-            }
-          );
-          const cats = await response.json();
-          setCats(cats);
-        })()
-      : (async () => {
-          const response = await fetch(
-            `${import.meta.env.VITE_BASE_URL}/images/search?limit=20`,
-            {
-              headers: {
-                "x-api-key": import.meta.env.VITE_API_KEY,
-              },
-            }
-          );
-          const cats = await response.json();
-          setCats(cats);
-        })();
-  }, [selectedBreed]);
+  const { data, fetchNextPage, hasNextPage, isFetching } = useListCatImages(
+    selectedBreed?.id
+  );
+  const breeds = useListBreeds();
 
   const options = React.useMemo(
     () => breeds.map((breed) => ({ id: breed.id, label: breed.name })),
@@ -77,16 +42,27 @@ export const BreedsPage = () => {
         onChange={handleSelect}
       />
 
-      <ImageList
-        sx={{ width: "100%", height: "auto" }}
-        variant="quilted"
-        cols={4}
-        rowHeight={164}
+      <InfiniteScroll
+        next={fetchNextPage}
+        hasMore={hasNextPage || false}
+        loader={<Typography>Loading...</Typography>}
+        style={{ width: "100%" }}
+        dataLength={
+          data?.pages.reduce((total, page) => total + page.length, 0) || 0
+        }
       >
-        {cats.map((cat) => (
-          <CatCard catImage={cat} breed={selectedBreed} />
-        ))}
-      </ImageList>
+        <Grid container spacing={2}>
+          {data?.pages.map((cats) =>
+            cats.map((cat) => (
+              <Grid item xs={12} md={6} lg={3} key={cat.id}>
+                <CatCard id={cat.id} />
+              </Grid>
+            ))
+          )}
+          {isFetching && <PlaceholderSkeleton />}
+        </Grid>
+      </InfiniteScroll>
+      <ScrollToTopButton />
     </>
   );
 };
