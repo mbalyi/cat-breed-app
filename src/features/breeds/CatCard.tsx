@@ -1,10 +1,10 @@
 import React from "react";
 import { useCat } from "./useCat";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardContentSkeleton } from "../../components/CardContentSkeleton";
 import { CardBox } from "../../components/card.styles";
+import { CardMedia, Description } from "./cat-card.styles";
 
 interface CatCardProps {
   id: string;
@@ -19,11 +19,6 @@ const CatCard: React.FC<CatCardProps> = ({ id }) => {
         <>
           <CardMedia
             component="img"
-            sx={{
-              width: "100%",
-              height: "200px",
-              display: "block",
-            }}
             image={cat.url}
             alt={breed?.name || "Image of cat"}
             loading="lazy"
@@ -37,9 +32,9 @@ const CatCard: React.FC<CatCardProps> = ({ id }) => {
                 <Typography variant="subtitle1" color="text.secondary">
                   {breed.origin}
                 </Typography>
-                <Typography variant="subtitle1" paragraph>
+                <Description variant="subtitle1" paragraph>
                   {breed.description}
-                </Typography>
+                </Description>
               </>
             ) : (
               <Typography variant="subtitle1" paragraph>
