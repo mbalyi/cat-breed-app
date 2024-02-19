@@ -1,24 +1,19 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Breed } from "./breed.types";
-import { useState } from "react";
 
-export const useListBreeds = (): Breed[] => {
-  const [breeds, setBreeds] = useState<Breed[]>([]);
-  console.log("import.meta.env.VITE_BASE_URL", import.meta.env.VITE_BASE_URL);
-  useQuery({
+export const useListBreeds = () => {
+  const queryResult = useQuery({
     queryKey: ["breeds"],
-    queryFn: () =>
+    queryFn: ({ signal }) =>
       axios
         .get<Breed[]>(`${import.meta.env.VITE_BASE_URL}/breeds`, {
           headers: {
             "x-api-key": import.meta.env.VITE_API_KEY,
           },
+          signal,
         })
-        .then((res) => {
-          setBreeds(res.data);
-          return res.data;
-        }),
+        .then((res) => res.data),
   });
-  return breeds;
+  return queryResult;
 };

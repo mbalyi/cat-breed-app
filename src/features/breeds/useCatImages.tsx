@@ -6,10 +6,10 @@ import React from "react";
 export const useListCatImages = (breed?: string) => {
   const queryResult = useInfiniteQuery({
     queryKey: ["catImages"],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ signal, pageParam = 1 }) =>
       axios
         .get<CatImage[]>(
-          `${import.meta.env.VITE_BASE_URL}/images/search${
+          `${import.meta.env.VITE_BASE_URL}/images/searchhh${
             breed ? `?breed_ids=${breed}` : ""
           }`,
           {
@@ -21,6 +21,7 @@ export const useListCatImages = (breed?: string) => {
             headers: {
               "x-api-key": import.meta.env.VITE_API_KEY,
             },
+            signal,
           }
         )
         .then((res) => res.data),

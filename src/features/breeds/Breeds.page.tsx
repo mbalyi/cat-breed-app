@@ -7,13 +7,20 @@ import { PlaceholderSkeleton } from "../../components/PlaceholderSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Breed } from "./breed.types";
 import { ScrollToTopButton } from "../../components/ScrollToTopButton";
+import { NoContent } from "../../components/NoContent";
+import { useIsOnline } from "../../components/useIsOnline";
 
 export const BreedsPage = () => {
   const [selectedBreed, setSelectedBreed] = React.useState<Breed | null>(null);
-  const { data, fetchNextPage, hasNextPage, isFetching } = useListCatImages(
-    selectedBreed?.id
-  );
-  const breeds = useListBreeds();
+  const isOnline = useIsOnline();
+  const {
+    data: images,
+    fetchNextPage,
+    hasNextPage,
+    isFetching: isImageFetching,
+    isError: isImageError,
+  } = useListCatImages(selectedBreed?.id);
+  const { data: breeds = [] } = useListBreeds();
 
   const options = React.useMemo(
     () => breeds.map((breed) => ({ id: breed.id, label: breed.name })),
@@ -48,18 +55,19 @@ export const BreedsPage = () => {
         loader={<Typography>Loading...</Typography>}
         style={{ width: "100%" }}
         dataLength={
-          data?.pages.reduce((total, page) => total + page.length, 0) || 0
+          images?.pages.reduce((total, page) => total + page.length, 0) || 0
         }
       >
         <Grid container spacing={2}>
-          {data?.pages.map((cats) =>
+          {images?.pages.map((cats) =>
             cats.map((cat) => (
               <Grid item xs={12} md={6} lg={3} key={cat.id}>
                 <CatCard id={cat.id} />
               </Grid>
             ))
           )}
-          {isFetching && <PlaceholderSkeleton />}
+          {isImageFetching && !isImageError && <PlaceholderSkeleton />}
+          {isImageError && <NoContent isOnline={isOnline} />}
         </Grid>
       </InfiniteScroll>
       <ScrollToTopButton />
