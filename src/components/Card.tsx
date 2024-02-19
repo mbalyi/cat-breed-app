@@ -3,7 +3,7 @@ import { CardContentSkeleton } from "./CardContentSkeleton";
 import { CardBox } from "./card.styles";
 
 const Card = () => (
-  <CardBox>
+  <CardBox data-testid="card">
     <CardContentSkeleton />
   </CardBox>
 );

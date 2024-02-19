@@ -33,8 +33,9 @@ export const ScrollToTopButton = () => {
     <Button
       size="medium"
       color="secondary"
-      aria-label="add"
+      aria-label="scroll-to-top"
       onClick={handleClick}
+      data-testid="scroll-to-top-button"
     >
       <ExpandLessIcon />
     </Button>
