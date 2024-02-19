@@ -1,13 +1,13 @@
 import { Stack } from "@mui/material";
-import React from "react";
-import { Header } from "./Header";
+import { FC, ReactElement } from "react";
+import { Header } from "../components/Header";
 import { MainContainer, SectionContainer } from "./main-layout.styles";
 
 interface MainLayoutProps {
-  children: React.ReactElement | React.ReactElement[];
+  children: ReactElement | ReactElement[];
 }
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <MainContainer maxWidth="lg">
       <Header />

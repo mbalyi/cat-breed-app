@@ -1,7 +1,7 @@
 import { Fab } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import { useEffect, useState } from "react";
 
 const Button = styled(Fab)`
   position: fixed;
@@ -9,10 +9,13 @@ const Button = styled(Fab)`
   right: 2%;
 `;
 
+/**
+ * Renders a button that appears when the user scrolls down and allows them to scroll back to the top of the page.
+ */
 export const ScrollToTopButton = () => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       setIsVisible(currentScrollPos > 100);

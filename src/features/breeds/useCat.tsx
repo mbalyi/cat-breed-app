@@ -1,7 +1,13 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useQuery } from "react-query";
 import { Breed, CatImage } from "./breed.types";
 
+/**
+ * Custom hook to fetch cat image and breed information based on the provided ID.
+ *
+ * @param id - The ID of the cat image.
+ * @returns An object containing the cat image and breed information.
+ */
 export const useCat = (
   id: string
 ): { cat: CatImage | null; breed: Breed | null } => {
@@ -9,12 +15,10 @@ export const useCat = (
   let breed = null;
   const queryResult = useQuery({
     queryKey: ["cat", id],
-    queryFn: () =>
+    queryFn: ({ signal }) =>
       axios
-        .get<CatImage>(`${import.meta.env.VITE_BASE_URL}/images/${id}`, {
-          headers: {
-            "x-api-key": import.meta.env.VITE_API_KEY,
-          },
+        .get<CatImage>(`/images/${id}`, {
+          signal,
         })
         .then((res) => res.data),
   });

@@ -5,6 +5,13 @@ interface NoContentProps {
   isOnline: boolean;
 }
 
+/**
+ * Renders a component to display a message when there is no content.
+ *
+ * @component
+ * @param {boolean} props.isOnline - Indicates whether the user is currently online.
+ * @returns {JSX.Element} The rendered NoContent component.
+ */
 export const NoContent: FC<NoContentProps> = ({ isOnline }) => (
   <Container data-testid="no-content">
     {isOnline ? (

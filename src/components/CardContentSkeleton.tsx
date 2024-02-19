@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Skeleton } from "@mui/material";
 import { SkeletonBox } from "./card-content-skeleton.sytes";
 
@@ -7,7 +7,16 @@ interface CustomSkeletonProps {
   testId?: string;
 }
 
-const CustomSkeleton: React.FC<CustomSkeletonProps> = ({ height, testId }) => (
+/**
+ * Custom Skeleton component for the card content.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {number} props.height - The height of the skeleton.
+ * @param {string} props.testId - The test ID for the skeleton.
+ * @returns {JSX.Element} The rendered CustomSkeleton component.
+ */
+const CustomSkeleton: FC<CustomSkeletonProps> = ({ height, testId }) => (
   <Skeleton
     variant="rounded"
     animation="wave"

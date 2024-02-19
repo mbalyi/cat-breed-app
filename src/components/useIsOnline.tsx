@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Custom hook that returns the online status of the user.
+ * @returns {boolean} The online status of the user.
+ */
 export const useIsOnline = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 

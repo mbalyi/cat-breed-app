@@ -1,16 +1,17 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useQuery } from "react-query";
 import { Breed } from "./breed.types";
 
+/**
+ * Custom hook for listing breeds.
+ * @returns {QueryResult<Breed[], unknown>} The query result containing the list of breeds.
+ */
 export const useListBreeds = () => {
   const queryResult = useQuery({
     queryKey: ["breeds"],
     queryFn: ({ signal }) =>
       axios
-        .get<Breed[]>(`${import.meta.env.VITE_BASE_URL}/breeds`, {
-          headers: {
-            "x-api-key": import.meta.env.VITE_API_KEY,
-          },
+        .get<Breed[]>("/breeds", {
           signal,
         })
         .then((res) => res.data),

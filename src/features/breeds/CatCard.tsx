@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, memo } from "react";
 import { useCat } from "./useCat";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -10,7 +10,15 @@ interface CatCardProps {
   id: string;
 }
 
-const CatCard: React.FC<CatCardProps> = ({ id }) => {
+/**
+ * Renders a card component for a cat with the provided ID.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.id - The ID of the cat.
+ * @returns {JSX.Element} The rendered CatCard component.
+ */
+const CatCard: FC<CatCardProps> = ({ id }) => {
   const { cat, breed } = useCat(id);
 
   return (
@@ -50,6 +58,6 @@ const CatCard: React.FC<CatCardProps> = ({ id }) => {
   );
 };
 
-const CatCardMemo = React.memo(CatCard);
+const CatCardMemo = memo(CatCard);
 
 export default CatCardMemo;

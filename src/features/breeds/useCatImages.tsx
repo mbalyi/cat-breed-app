@@ -1,25 +1,26 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useInfiniteQuery } from "react-query";
 import { CatImage } from "./breed.types";
-import React from "react";
+import { useEffect } from "react";
 
+/**
+ * Custom hook for fetching a list of cat images for infinite scrolling.
+ *
+ * @param breed - The breed of the cat images to fetch.
+ * @returns The query result object.
+ */
 export const useListCatImages = (breed?: string) => {
   const queryResult = useInfiniteQuery({
     queryKey: ["catImages"],
     queryFn: ({ signal, pageParam = 1 }) =>
       axios
         .get<CatImage[]>(
-          `${import.meta.env.VITE_BASE_URL}/images/searchhh${
-            breed ? `?breed_ids=${breed}` : ""
-          }`,
+          `/images/search${breed ? `?breed_ids=${breed}` : ""}`,
           {
             params: {
               limit: import.meta.env.VITE_API_LIMIT,
               page: pageParam - 1,
               breed_ids: breed,
-            },
-            headers: {
-              "x-api-key": import.meta.env.VITE_API_KEY,
             },
             signal,
           }
@@ -30,8 +31,9 @@ export const useListCatImages = (breed?: string) => {
         ? undefined
         : allPages.length + 1,
   });
-  React.useEffect(() => {
+  useEffect(() => {
     queryResult.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [breed]);
   return queryResult;
 };

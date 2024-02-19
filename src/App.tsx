@@ -3,6 +3,9 @@ import { BreedsPage } from "./features/breeds/Breeds.page";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+/**
+ * The default theme for the cat breed app.
+ */
 const defaultTheme = createTheme({
   palette: {
     secondary: {
@@ -25,6 +28,10 @@ const defaultTheme = createTheme({
     },
   },
 });
+
+/**
+ * The query client used for fetching data in the application.
+ */
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
