@@ -9,6 +9,15 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setup.ts',
-    css: true
+    css: true,
+    coverage: {
+      provider: 'v8',
+      thresholds: {
+        lines: 85,
+        statements: 85,
+        branches: 90,
+        functions: 80,
+      }
+    }
    },
 })

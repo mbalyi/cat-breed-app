@@ -1,5 +1,7 @@
 # MeowPedia: Discover Feline Wonders!
 
+[![Build](https://github.com/mbalyi/cat-breed-app/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/mbalyi/cat-breed-app/actions/workflows/build.yml) [![Test](https://github.com/mbalyi/cat-breed-app/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/mbalyi/cat-breed-app/actions/workflows/test.yml) [![Coverage](https://github.com/mbalyi/cat-breed-app/actions/workflows/coverage.yml/badge.svg?branch=main)](https://github.com/mbalyi/cat-breed-app/actions/workflows/coverage.yml)
+
 Welcome to MeowPedia, your go-to destination for exploring adorable cat images alongside fascinating details about their breed types, origins, and descriptions. Powered by Vite and React, and enhanced with the efficiency of React Query, responsive website ensures seamless browsing across all devices.
 
 With MeowPedia, delight in an endless stream of cat images through our intuitive infinite scroll feature, dynamically loading content as you explore. Looking for something specific? Our advanced filtering functionality allows you to narrow down results effortlessly by breed type, making it easier than ever to find your favorite feline companions.
