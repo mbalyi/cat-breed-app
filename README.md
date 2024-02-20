@@ -10,9 +10,9 @@ Backed by rigorous testing with vitest and testing-library/react, MeowPedia guar
 
 - Cat Image Display: The app showcases a collection of cat images, allowing users to browse through a visually appealing gallery of adorable feline companions.
 - Cat Information:
-  -- Breed Type: Each cat image is accompanied by detailed information about its breed type, providing users with insights into the diverse range of cat breeds.
-  -- Origin: Users can learn about the origins of each cat breed, gaining a deeper understanding of their cultural and geographical backgrounds.
-  -- Description: The app presents descriptions for each cat breed, offering users additional context and characteristics to further appreciate the uniqueness of each feline.
+  - Breed Type: Each cat image is accompanied by detailed information about its breed type, providing users with insights into the diverse range of cat breeds.
+  - Origin: Users can learn about the origins of each cat breed, gaining a deeper understanding of their cultural and geographical backgrounds.
+  - Description: The app presents descriptions for each cat breed, offering users additional context and characteristics to further appreciate the uniqueness of each feline.
 - Filter by Breed Type: Users can filter the displayed cat images based on specific breed types, allowing them to easily find images of their favorite cat breeds or explore new ones.
 - Infinite Scroll: The app implements an infinite scroll feature, enabling continuous loading of cat images as users scroll down the page, ensuring a seamless and uninterrupted browsing experience.
 - The loading screen features a skeleton element to underscore to the user that the app is in the process of loading content.
@@ -85,7 +85,7 @@ At the moment, code coverage is:
 - Adding husky prehook plugin to check code coverage before push to remote.
 - Creating github pipeline to build the application and upload it to AWS.
 - Display a placeholder for the search field when the app is unable to request breed types.
-- Implementing a notification for users when switching to offline mode.
+- Implementing a notification for users when they switch to offline.
 
   [React]: https://react.dev/
   [Typescript]: https://typescriptlang.org/
