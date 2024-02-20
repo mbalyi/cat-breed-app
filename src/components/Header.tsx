@@ -13,5 +13,6 @@ export const Header = () => (
     src={LargeImg}
     srcSet={`${SmallImg} 400w, ${MediumImg} 800w, ${LargeImg} 1200w`}
     sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 100%"
+    data-testid="header-component"
   />
 );

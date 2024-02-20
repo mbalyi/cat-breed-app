@@ -30,11 +30,16 @@ const CatCard: FC<CatCardProps> = ({ id }) => {
             image={cat.url}
             alt={breed?.name || "Image of cat"}
             loading="lazy"
+            role="presentation"
           />
           <CardContent>
             {breed ? (
               <>
-                <Typography component="h2" variant="h5">
+                <Typography
+                  component="h2"
+                  variant="h5"
+                  data-testid={"cat-card-title-" + breed.id}
+                >
                   {breed.name}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">

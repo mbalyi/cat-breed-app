@@ -11,20 +11,17 @@ import { useEffect } from "react";
  */
 export const useListCatImages = (breed?: string) => {
   const queryResult = useInfiniteQuery({
-    queryKey: ["catImages"],
+    queryKey: ["catImages", breed],
     queryFn: ({ signal, pageParam = 1 }) =>
       axios
-        .get<CatImage[]>(
-          `/images/search${breed ? `?breed_ids=${breed}` : ""}`,
-          {
-            params: {
-              limit: import.meta.env.VITE_API_LIMIT,
-              page: pageParam - 1,
-              breed_ids: breed,
-            },
-            signal,
-          }
-        )
+        .get<CatImage[]>(`/images/search`, {
+          params: {
+            limit: import.meta.env.VITE_API_LIMIT,
+            page: pageParam - 1,
+            breed_ids: breed,
+          },
+          signal,
+        })
         .then((res) => res.data),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length < import.meta.env.VITE_API_LIMIT

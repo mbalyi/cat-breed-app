@@ -13,4 +13,10 @@ export const CardMedia = styled(MuiCardMedia)<CardMediaProps & {alt: string, loa
     width: 100%;
     height: 200px;
     display: block;
+    // TODO: add zooming effect
+    // transition: transform .2s;
+
+    // :hover {
+    //     transform: scale(1.5);
+    // }
 `

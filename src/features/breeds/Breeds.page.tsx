@@ -47,6 +47,7 @@ export const BreedsPage = () => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Search" />}
         onChange={handleSelect}
+        data-testid="breed-search-autocomplete"
       />
 
       <InfiniteScroll
@@ -58,7 +59,7 @@ export const BreedsPage = () => {
           images?.pages.reduce((total, page) => total + page.length, 0) || 0
         }
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={2} data-testid="breed-infinite-scroll-grid">
           {images?.pages.map((cats) =>
             cats.map((cat) => (
               <Grid item xs={12} md={6} lg={3} key={cat.id}>

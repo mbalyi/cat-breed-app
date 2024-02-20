@@ -71,7 +71,12 @@ For coverage:
 npm run coverage
 ```
 
-At the moment, code coverage is around ~25%.
+At the moment, code coverage is:
+
+- Statements: 85%
+- Branch: 90%
+- Functions: 84%
+- Lines: 85%
 
 ## Improvement ideas
 

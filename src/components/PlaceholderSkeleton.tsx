@@ -7,8 +7,9 @@ import Card from "./Card";
  * @returns {JSX.Element[]} An array of JSX elements representing the placeholder skeletons.
  */
 export const PlaceholderSkeleton = () =>
-  Array.from(Array(parseInt(import.meta.env.VITE_API_LIMIT)).keys()).map(
-    (_item, index) => (
+  new Array(parseInt(import.meta.env.VITE_API_LIMIT))
+    .fill(undefined)
+    .map((_item, index) => (
       <Grid
         item
         xs={12}
@@ -19,5 +20,4 @@ export const PlaceholderSkeleton = () =>
       >
         <Card />
       </Grid>
-    )
-  );
+    ));
